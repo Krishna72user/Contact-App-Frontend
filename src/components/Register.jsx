@@ -14,7 +14,7 @@ export default function Register(){
         setTimeout(()=>{
             setLoader(false)
         },3000)
-        const st =await  handleRegister(emails,name.current.value,pass.current.value)
+        const st =await  handleRegister(email.current.value,name.current.value,pass.current.value)
         if(st){
             setAuth(true)
             navigate(`/${name.current.value}`)
@@ -28,6 +28,7 @@ export default function Register(){
     },[navigate])
 
     const name = useRef()
+    const email = useRef()
     const pass = useRef()
     return (
         <>
@@ -37,7 +38,7 @@ export default function Register(){
                     <div className="font-medium">Name :</div>
                     <input ref={name} className="p-1 input"id="email"name="email" placeholder="Enter your name." ></input>
                     <div className="font-medium">Email :</div>
-                    <input value={emails} onChange={(e)=>{e.target.value = emails}} className="p-1 input"id="email"name="email" placeholder="Enter your email." ></input>
+                    <input value={emails} ref={email} onChange={(e)=>{e.target.value = emails}} className="p-1 input"id="email"name="email" placeholder="Enter your email." ></input>
                     <div className="font-medium">Password :</div>
                     <input ref={pass}  className="p-1 input"id="pass"name="pass" placeholder="Enter your password." ></input>
                     <div className="text-red-500 text-xs font-medium">{log}</div>

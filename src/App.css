@@ -1,0 +1,73 @@
+NavLink:hover{
+  cursor: pointer;
+}
+button:hover{
+  cursor: pointer;
+}
+.input{
+  outline: none;
+  background-color: rgb(241, 250, 252);
+  padding: 10px;
+}
+.alert {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100vw;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeInOut 5s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-100px); }
+  10% { opacity: 1; transform:  translateY(0px); }
+  80% { opacity: 1; transform:  translateY(0px); }
+  100%{
+    opacity: 0;transform: translateY(-100px);
+  }
+}
+@media only screen and (max-width:500px){
+  .big{
+    display: none;
+  }
+}
+@keyframes modals {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+.modal{
+  animation: modals 500ms ease-in 0s 1 forwards;
+}
+@keyframes open {
+  0%{
+    transform: translateY(-10em);
+  }
+  100%{
+    transform: translateY(0em);
+  }
+}
+@keyframes close {
+  0%{
+    transform: translateY(0em);
+  }
+  100%{
+    transform: translateY(-14em);
+  }
+}
+.opened{
+  animation: open 1s ease-in 0s 1 forwards ;
+}
+.closed{
+  animation: close 1s ease-in 0s 1 forwards ;
+}
+.box{
+  z-index: -1;
+}
+.initial{
+  top: -20em;
+}

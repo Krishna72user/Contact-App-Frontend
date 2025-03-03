@@ -1,18 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 import { useContext } from "react";
 import ContactContext from "../Context/ContactContext";
 import { useNavigate } from "react-router-dom";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 export default function Register(){
     const navigate= useNavigate()
+    const [loader,setLoader] = useState(false)
     const {handleRegister,log,emails,setAuth} = useContext(ContactContext)
     const regHandler =async(e)=>{
         e.preventDefault();
+        setLoader(true)
+        setTimeout(()=>{
+            setLoader(false)
+        },3000)
         const st =await  handleRegister(emails,name.current.value,pass.current.value)
         if(st){
             setAuth(true)
             navigate(`/${name.current.value}`)
         }
-
     }
 
     useEffect(()=>{
@@ -35,7 +41,13 @@ export default function Register(){
                     <div className="font-medium">Password :</div>
                     <input ref={pass}  className="p-1 input"id="pass"name="pass" placeholder="Enter your password." ></input>
                     <div className="text-red-500 text-xs font-medium">{log}</div>
-                    <button type="submit"  className="px-2 py-1 mx-auto mb-2 md:mb-4 bg-blue-500 hover:bg-blue-400 text-white font-bold w-[5em]" >Register</button>
+                  {!loader && <button type="submit"  className="px-2 py-1 mx-auto mb-2 md:mb-4 bg-blue-500 hover:bg-blue-400 text-white font-bold w-[5em]" >Register</button>}
+                    {loader &&<div  className="px-2 py-1 mx-auto"> <ScaleLoader
+                    color="#52deef"
+                    cssOverride={{}}
+                    height={25}
+                    width={3}
+                    /></div>}
                 </form>
             </div>
         </>

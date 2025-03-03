@@ -7,6 +7,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 export default function OtpVerify(){
     const {sendMail,setEmail,verify,checkUser} = useContext(ContactContext)
     const [loader,setLoader] = useState(false)
+    const [sloader,setsLoader] = useState(false)
     const [error,setError] = useState(false)
     const navigate = useNavigate()
     const otp = useRef()
@@ -23,11 +24,11 @@ export default function OtpVerify(){
             if(!res){
                 setExists("")
                 sendMail(email.current.value)
-                setLoader(true)
+                setsLoader(true)
                 document.querySelector(".sendBtn").classList.toggle("hidden")
                 setTimeout(()=>{
                     setSend(true)
-                    setLoader(false)
+                    setsLoader(false)
                 },2000)
             }
             else{
@@ -40,6 +41,13 @@ export default function OtpVerify(){
     }
     const mailHandler =async(e)=>{
         e.preventDefault()
+        setLoader(true)
+        setTimeout(()=>{
+            setLoader(false)
+        },4000)
+        setTimeout(()=>{
+            setEmail(null)
+        },10000)
         const status = await verify(otp.current.value)
         if(status){
             navigate('/register')
@@ -66,16 +74,21 @@ export default function OtpVerify(){
                     <div className="font-medium">OTP :</div>
                     <input ref={otp}  className="p-1 input"id="otp"name="otp" placeholder="Enter the otp" ></input>
                     <div className="text-red-500 font-medium text-xs">{log}</div>
-                    <div className="flex gap-4 mx-auto">
+                   {!loader ? <div className="flex gap-4 mx-auto">
                         <button type="submit"  className="px-2 py-1 bg-blue-500  hover:bg-blue-400 rounded text-white font-bold w-[5em]"> Verify</button>
                         <button onClick={resend} className="px-2 py-1 bg-blue-500  hover:bg-blue-400 rounded text-white font-bold w-[7em]"> Resend OTP</button>
-                    </div>
+                    </div> :<div className="flex gap-4 mx-auto"> <ScaleLoader
+                            color="#52deef"
+                            cssOverride={{}}
+                            height={25}
+                            width={3}/></div>
+                    }
              </div>}
             <div className="text-red-500 font-medium text-xs">{exists}</div>
             </form>
            { <button onClick={handleOtp} className="px-2 sendBtn py-1 my-4 bg-blue-500 mx-auto hover:bg-blue-400 rounded text-white  font-bold w-[7em]">Send OTP</button>}
            <div className="my-3">
-                {loader && <ScaleLoader
+                {sloader && <ScaleLoader
                 color="#52deef"
                 cssOverride={{}}
                 height={25}

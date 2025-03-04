@@ -142,12 +142,7 @@ export const ContactState=(props)=>{
         })
         setContacts(res.data)
     }
-    useEffect(()=>{
-        if(localStorage.getItem('authtoken')){
-            getData()
-            handleName(localStorage.getItem('authtoken'))
-        }
-    },[])
+  
     const deleteData =async (id)=>{
         const res =await axios.delete(`${host}/api/contacts/delete/${id}`,{
         headers:{

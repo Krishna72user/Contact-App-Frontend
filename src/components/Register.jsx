@@ -7,7 +7,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 export default function Register(){
     const navigate= useNavigate()
     const [loader,setLoader] = useState(false)
-    const {handleRegister,log,emails,setAuth} = useContext(ContactContext)
+    const {handleRegister,log,emails,setAuth,auth} = useContext(ContactContext)
     const regHandler =async(e)=>{
         e.preventDefault();
         setLoader(true)
@@ -22,7 +22,7 @@ export default function Register(){
     }
 
     useEffect(()=>{
-        if(!emails){
+        if(!auth){
             navigate('/verify')
         }
     },[navigate])

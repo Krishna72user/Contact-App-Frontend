@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function OtpVerify(){
-    const {sendMail,setEmail,verify,checkUser} = useContext(ContactContext)
+    const {sendMail,setEmail,verify,checkUser,setAuth} = useContext(ContactContext)
     const [loader,setLoader] = useState(false)
     const [sloader,setsLoader] = useState(false)
     const [error,setError] = useState(false)
@@ -51,6 +51,7 @@ export default function OtpVerify(){
         const status = await verify(otp.current.value)
         if(status){
             navigate('/register')
+            setAuth(true)
         }
         else{
             setLog("Invalid OTP!")

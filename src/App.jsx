@@ -27,8 +27,10 @@ function App() {
 },[])
 
 useEffect(()=>{
-  if(name)
-    navigate(`/${name}`)
+  if(name){
+    const fixed = name.trim()
+    navigate(`/${fixed}`)
+  }
   },[name]) // Naviagate when name is updated
   return (
     <>
